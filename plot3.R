@@ -16,6 +16,8 @@ data$DateTime <- paste(data$Date, data$Time)
 data$DateTime <- strptime(data$DateTime, "%Y-%m-%d %H:%M:%S")
 
 # Plot
+locale <- Sys.getlocale(category = "LC_TIME")
+Sys.setlocale(category = "LC_TIME", locale = "en_US.UTF-8")
 png("plot3.png", width=480, height=480, bg="transparent")
 plot(data$DateTime, data$Global_active_power, xlab="", ylab="Energy sub metering", 
      ylim=c(0, 38), type="n")
@@ -25,3 +27,4 @@ lines(data$DateTime, data$Sub_metering_3, col="blue")
 legend("topright", lwd=1 , col=c("black", "red", "blue"), 
        legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 dev.off()
+Sys.setlocale("LC_TIME", locale)

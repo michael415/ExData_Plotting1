@@ -16,7 +16,10 @@ data$DateTime <- paste(data$Date, data$Time)
 data$DateTime <- strptime(data$DateTime, "%Y-%m-%d %H:%M:%S")
 
 # Plot
+locale <- Sys.getlocale(category = "LC_TIME")
+Sys.setlocale(category = "LC_TIME", locale = "en_US.UTF-8")
 png("plot2.png", width=480, height=480, bg="transparent")
 plot(data$DateTime, data$Global_active_power, xlab="", ylab="Global Active Power (kilowatts)", type="n")
 lines(data$DateTime, data$Global_active_power, type="l")
 dev.off()
+Sys.setlocale("LC_TIME", locale)

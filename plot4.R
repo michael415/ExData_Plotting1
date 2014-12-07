@@ -16,6 +16,8 @@ data$DateTime <- paste(data$Date, data$Time)
 data$DateTime <- strptime(data$DateTime, "%Y-%m-%d %H:%M:%S")
 
 # Plot
+locale <- Sys.getlocale(category = "LC_TIME")
+Sys.setlocale( category = "LC_TIME", locale = "en_US.UTF-8")
 png("plot4.png", width=480, height=480, bg="transparent")
 par(mfcol=c(2,2))
 # 1
@@ -37,3 +39,4 @@ plot(data$DateTime, data$Global_reactive_power, xlab="datetime", ylab="Global_re
      type="n")
 lines(data$DateTime, data$Global_reactive_power)
 dev.off()
+Sys.setlocale("LC_TIME", locale)
